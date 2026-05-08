@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advertise With Us – BizConnect</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f0f0f;--teal:#00897b;--amber:#ffb300;--coral:#ff5722;--violet:#5c35d4;--sky:#0288d1;--gold:#f59e0b;--bg:#fafaf7;--border:#e0e0d8;--text-muted:#666660}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink)}
+.banner-zone{background:#1a1a2e;border-bottom:2px solid var(--gold)}
+.ad-slot{display:flex;align-items:center;justify-content:center;min-height:90px;background:linear-gradient(135deg,#1a1a2e,#2d2800);position:relative}
+.ad-slot .ad-label{position:absolute;top:6px;right:10px;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:2px}
+.ad-placeholder{font-family:'Syne',sans-serif;font-size:16px;color:rgba(255,255,255,0.2);letter-spacing:3px;text-transform:uppercase;margin-right:20px}
+.ad-cta{background:var(--gold);color:#000;padding:8px 20px;border-radius:4px;font-size:13px;font-weight:700;text-decoration:none}
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.06)}
+.nav-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--teal);text-decoration:none}.logo span{color:var(--amber)}
+.nav-links{display:flex;gap:6px}
+.nav-links a{text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 16px;border-radius:6px;transition:all .2s}
+.nav-links .btn-home{background:var(--teal);color:#fff}
+.nav-links .btn-listing{background:var(--violet);color:#fff}
+.nav-links .btn-buysell{background:var(--coral);color:#fff}
+.nav-links .btn-advertise{background:var(--amber);color:#000}
+.nav-links .btn-shop{background:var(--sky);color:#fff}
+.nav-links a:hover{opacity:.85;transform:translateY(-1px)}
+.page-header{background:linear-gradient(135deg,#1a1200,#f59e0b,#fbbf24);color:#000;padding:72px 24px;text-align:center;position:relative;overflow:hidden}
+.page-header::before{content:'📣';position:absolute;left:-20px;bottom:-20px;font-size:200px;opacity:0.06}
+.page-header .label{display:inline-block;background:rgba(0,0,0,0.1);border:1px solid rgba(0,0,0,0.15);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px;font-weight:700}
+.page-header h1{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,56px);font-weight:800;letter-spacing:-2px;margin-bottom:12px}
+.page-header p{font-size:17px;max-width:600px;margin:0 auto;opacity:.75;line-height:1.6}
+.main{max-width:1100px;margin:0 auto;padding:72px 24px}
+.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:8px}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,38px);font-weight:800;margin-bottom:8px;letter-spacing:-1px}
+.section-sub{color:var(--text-muted);font-size:15px;margin-bottom:56px}
+
+/* TOGGLE */
+.billing-toggle{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:48px}
+.billing-toggle span{font-size:14px;font-weight:600}
+.toggle-switch{position:relative;width:54px;height:28px;background:#ddd;border-radius:20px;cursor:pointer;transition:background .3s}
+.toggle-switch.on{background:var(--teal)}
+.toggle-knob{position:absolute;top:4px;left:4px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+.toggle-switch.on .toggle-knob{transform:translateX(26px)}
+.save-badge{background:var(--teal);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px}
+
+/* PLANS */
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-bottom:80px}
+.plan{background:#fff;border:2px solid var(--border);border-radius:18px;padding:36px 28px;position:relative;transition:all .3s}
+.plan:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,0.1)}
+.plan.popular{border-color:var(--amber);box-shadow:0 8px 32px rgba(245,158,11,0.2)}
+.plan.pro{border-color:var(--violet);box-shadow:0 8px 32px rgba(92,53,212,0.15)}
+.popular-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--amber);color:#000;font-size:10px;font-weight:800;letter-spacing:2px;padding:5px 16px;border-radius:20px;text-transform:uppercase;white-space:nowrap}
+.plan-icon{font-size:36px;margin-bottom:14px}
+.plan-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:4px}
+.plan-tagline{font-size:13px;color:var(--text-muted);margin-bottom:20px}
+.plan-price{margin-bottom:8px}
+.price-num{font-family:'Syne',sans-serif;font-size:40px;font-weight:800}
+.price-period{font-size:14px;color:var(--text-muted)}
+.price-annual{font-size:12px;color:var(--teal);font-weight:600;margin-bottom:24px}
+.plan-divider{border:none;border-top:1px solid var(--border);margin:20px 0}
+.plan-features{list-style:none;margin-bottom:28px}
+.plan-features li{font-size:14px;padding:7px 0;display:flex;align-items:flex-start;gap:10px;color:var(--ink)}
+.plan-features li span.check{color:var(--teal);font-weight:700;flex-shrink:0}
+.plan-features li span.cross{color:#ccc;flex-shrink:0}
+.plan-features li.disabled{color:#bbb}
+.plan-btn{display:block;text-align:center;padding:13px;border-radius:10px;font-weight:800;font-size:14px;letter-spacing:.5px;text-decoration:none;transition:all .2s;cursor:pointer;border:none;width:100%;font-family:'DM Sans',sans-serif}
+.btn-starter{background:#f5f5f5;color:var(--ink)}
+.btn-starter:hover{background:#e0e0e0}
+.btn-popular{background:var(--amber);color:#000}
+.btn-popular:hover{background:#e6a000}
+.btn-pro{background:var(--violet);color:#fff}
+.btn-pro:hover{background:#4a28b8}
+.btn-enterprise{background:var(--ink);color:#fff}
+.btn-enterprise:hover{background:#333}
+
+/* AD SPACES */
+.ad-types{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:80px}
+.ad-type-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px;transition:all .2s}
+.ad-type-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.08);border-color:var(--teal)}
+.ad-type-icon{font-size:36px;margin-bottom:14px}
+.ad-type-card h3{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:6px}
+.ad-type-card p{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px}
+.ad-type-price{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--teal)}
+.ad-type-price small{font-size:13px;font-weight:400;color:var(--text-muted)}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;border-radius:20px;padding:60px;text-align:center;margin-bottom:80px}
+.cta-section h2{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,40px);font-weight:800;margin-bottom:12px;letter-spacing:-1px}
+.cta-section p{color:rgba(255,255,255,0.7);font-size:16px;margin-bottom:28px}
+.cta-btn{background:var(--amber);color:#000;padding:15px 40px;border-radius:10px;font-weight:800;font-size:16px;text-decoration:none;display:inline-block}
+
+/* STATS */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:24px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:36px;margin-bottom:80px;text-align:center}
+.stat-item .num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--teal)}
+.stat-item .lbl{font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
+footer{background:#0f0f0f;color:#ccc;padding:48px 24px 0;margin-top:40px}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px}
+.footer-brand .logo{font-size:22px;display:block;margin-bottom:12px}
+.footer-brand p{font-size:13px;color:#777;line-height:1.7;max-width:260px}
+.footer-col h4{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:9px}
+.footer-col ul li a{color:#777;text-decoration:none;font-size:13px;transition:color .2s}
+.footer-col ul li a:hover{color:var(--teal)}
+.footer-bottom{border-top:1px solid #222;padding:18px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-bottom p{font-size:12px;color:#555}
+.footer-legal{display:flex;gap:18px}
+.footer-legal a{color:#555;text-decoration:none;font-size:12px}
+.footer-legal a:hover{color:var(--teal)}
+@media(max-width:768px){.nav-links{display:none}.footer-grid{grid-template-columns:1fr 1fr}.cta-section{padding:40px 24px}}
+</style>
+</head>
+<body>
+
+<div class="banner-zone">
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <div class="ad-placeholder">[ Banner Ad – 728×90 ]</div>
+    <a href="#" class="ad-cta">Book This Spot</a>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Biz<span>Connect</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="btn-home">🏠 Home</a>
+      <a href="listing.html" class="btn-listing">📋 Listings</a>
+      <a href="buysell.html" class="btn-buysell">🔄 Buy & Sell</a>
+      <a href="advertise.html" class="btn-advertise">📣 Advertise</a>
+      <a href="shop.html" class="btn-shop">🛍 Shop</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="label">Grow Your Business</div>
+  <h1>Advertise With BizConnect</h1>
+  <p>Reach 98,000+ monthly visitors and thousands of ready-to-buy customers. Choose a plan that works for your business.</p>
+</div>
+
+<div class="main">
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="num">98K+</div><div class="lbl">Monthly Visitors</div></div>
+    <div class="stat-item"><div class="num">12K+</div><div class="lbl">Active Listings</div></div>
+    <div class="stat-item"><div class="num">4.8★</div><div class="lbl">Avg Seller Rating</div></div>
+    <div class="stat-item"><div class="num">340+</div><div class="lbl">Categories</div></div>
+    <div class="stat-item"><div class="num">₹0</div><div class="lbl">Commission We Take</div></div>
+  </div>
+
+  <!-- BILLING TOGGLE -->
+  <div style="text-align:center;margin-bottom:8px">
+    <p class="section-label" style="justify-content:center;display:block">Subscription Plans</p>
+    <h2 class="section-title">Choose Your Plan</h2>
+    <p class="section-sub">All plans include a listing page. Upgrade for more visibility, features & leads. <strong>No commission — you keep 100% of your earnings.</strong></p>
+  </div>
+  <div class="billing-toggle">
+    <span>Monthly</span>
+    <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()"><div class="toggle-knob"></div></div>
+    <span>Annual</span>
+    <span class="save-badge">SAVE 20%</span>
+  </div>
+
+  <!-- PLANS -->
+  <div class="plans-grid">
+    <!-- Starter -->
+    <div class="plan">
+      <div class="plan-icon">🌱</div>
+      <div class="plan-name">Starter</div>
+      <div class="plan-tagline">Perfect for getting online</div>
+      <div class="plan-price"><span class="price-num" id="p1">₹499</span><span class="price-period">/month</span></div>
+      <div class="price-annual" id="pa1">Billed ₹5,988/year</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li><span class="check">✔</span> 1 Business Listing</li>
+        <li><span class="check">✔</span> Basic Profile Page</li>
+        <li><span class="check">✔</span> Phone & WhatsApp Button</li>
+        <li><span class="check">✔</span> 5 Photos</li>
+        <li class="disabled"><span class="cross">✗</span> Featured Placement</li>
+        <li class="disabled"><span class="cross">✗</span> Analytics Dashboard</li>
+        <li class="disabled"><span class="cross">✗</span> Priority Support</li>
+      </ul>
+      <button class="plan-btn btn-starter">Get Started</button>
+    </div>
+    <!-- Growth (Popular) -->
+    <div class="plan popular">
+      <div class="popular-badge">⭐ Most Popular</div>
+      <div class="plan-icon">🚀</div>
+      <div class="plan-name">Growth</div>
+      <div class="plan-tagline">Best for active businesses</div>
+      <div class="plan-price"><span class="price-num" id="p2">₹1,299</span><span class="price-period">/month</span></div>
+      <div class="price-annual" id="pa2">Billed ₹15,588/year</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li><span class="check">✔</span> 3 Business Listings</li>
+        <li><span class="check">✔</span> Enhanced Profile + Gallery</li>
+        <li><span class="check">✔</span> Featured Badge</li>
+        <li><span class="check">✔</span> 20 Photos + Videos</li>
+        <li><span class="check">✔</span> Analytics Dashboard</li>
+        <li><span class="check">✔</span> Appear in Search Results Top</li>
+        <li class="disabled"><span class="cross">✗</span> Homepage Feature Slot</li>
+      </ul>
+      <button class="plan-btn btn-popular">Choose Growth</button>
+    </div>
+    <!-- Pro -->
+    <div class="plan pro">
+      <div class="plan-icon">💎</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-tagline">Maximum visibility & leads</div>
+      <div class="plan-price"><span class="price-num" id="p3">₹2,499</span><span class="price-period">/month</span></div>
+      <div class="price-annual" id="pa3">Billed ₹29,988/year</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li><span class="check">✔</span> 10 Business Listings</li>
+        <li><span class="check">✔</span> Premium Profile Page</li>
+        <li><span class="check">✔</span> Homepage Featured Slot</li>
+        <li><span class="check">✔</span> Unlimited Photos & Videos</li>
+        <li><span class="check">✔</span> Advanced Analytics</li>
+        <li><span class="check">✔</span> Priority Search Ranking</li>
+        <li><span class="check">✔</span> Dedicated Account Manager</li>
+      </ul>
+      <button class="plan-btn btn-pro">Choose Pro</button>
+    </div>
+    <!-- Enterprise -->
+    <div class="plan">
+      <div class="plan-icon">🏢</div>
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-tagline">For chains & large networks</div>
+      <div class="plan-price"><span class="price-num">Custom</span></div>
+      <div class="price-annual">Tailored pricing for your scale</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li><span class="check">✔</span> Unlimited Listings</li>
+        <li><span class="check">✔</span> Multi-location Management</li>
+        <li><span class="check">✔</span> API Access</li>
+        <li><span class="check">✔</span> Custom Banner Campaigns</li>
+        <li><span class="check">✔</span> White-label Options</li>
+        <li><span class="check">✔</span> SLA-backed Support</li>
+        <li><span class="check">✔</span> Dedicated Success Team</li>
+      </ul>
+      <button class="plan-btn btn-enterprise">Contact Sales</button>
+    </div>
+  </div>
+
+  <!-- AD TYPES -->
+  <p class="section-label">Add-On Options</p>
+  <h2 class="section-title">Ad Space Packages</h2>
+  <p class="section-sub">In addition to your listing subscription, boost visibility with targeted ad placements.</p>
+  <div class="ad-types">
+    <div class="ad-type-card">
+      <div class="ad-type-icon">🖼️</div>
+      <h3>Banner Ad</h3>
+      <p>728×90 leaderboard banner displayed site-wide at the top of every page. High impression volume.</p>
+      <div class="ad-type-price">₹2,999 <small>/ month</small></div>
+    </div>
+    <div class="ad-type-card">
+      <div class="ad-type-icon">📺</div>
+      <h3>Video Ad</h3>
+      <p>Auto-play video slot (muted) on the homepage and listing pages. 15–30 second clips.</p>
+      <div class="ad-type-price">₹4,999 <small>/ month</small></div>
+    </div>
+    <div class="ad-type-card">
+      <div class="ad-type-icon">📰</div>
+      <h3>Sidebar Ad</h3>
+      <p>300×250 medium rectangle in the listing sidebar. Perfect targeting for category-specific pages.</p>
+      <div class="ad-type-price">₹1,499 <small>/ month</small></div>
+    </div>
+    <div class="ad-type-card">
+      <div class="ad-type-icon">🔝</div>
+      <h3>Sponsored Top Listing</h3>
+      <p>Pin your business at the very top of search results in your chosen category — guaranteed position.</p>
+      <div class="ad-type-price">₹3,499 <small>/ month</small></div>
+    </div>
+    <div class="ad-type-card">
+      <div class="ad-type-icon">📧</div>
+      <h3>Email Newsletter</h3>
+      <p>Feature your business in our weekly newsletter sent to 40,000+ subscribers across India.</p>
+      <div class="ad-type-price">₹1,999 <small>/ send</small></div>
+    </div>
+    <div class="ad-type-card">
+      <div class="ad-type-icon">🏠</div>
+      <h3>Homepage Feature</h3>
+      <p>Your business in the hero "Featured Listings" section on the homepage — maximum brand exposure.</p>
+      <div class="ad-type-price">₹5,999 <small>/ month</small></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Ready to grow your business?</h2>
+    <p>Join 3,200+ businesses already growing with BizConnect. Start your free 14-day trial — no credit card needed.</p>
+    <a href="#" class="cta-btn">Start Free Trial →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="logo">Biz<span>Connect</span></a><p>India's trusted local business directory. Connecting buyers and sellers since 2020.</p></div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="listing.html">Business Listings</a></li><li><a href="buysell.html">Buy & Sell</a></li><li><a href="shop.html">Shop</a></li></ul></div>
+      <div class="footer-col"><h4>Business</h4><ul><li><a href="advertise.html">Advertise</a></li><li><a href="advertise.html">Subscription Plans</a></li><li><a href="#">Add Listing</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms & Conditions</a></li><li><a href="#">Cookie Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 BizConnect. All rights reserved.</p>
+      <div class="footer-legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="#">Cookie Policy</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+let annual = false;
+const monthly = {p1:'₹499',p2:'₹1,299',p3:'₹2,499'};
+const annualP = {p1:'₹399',p2:'₹1,039',p3:'₹1,999'};
+const annualBilled = {pa1:'Billed ₹4,788/year (save ₹1,200)',pa2:'Billed ₹12,468/year (save ₹3,120)',pa3:'Billed ₹23,988/year (save ₹5,988)'};
+const monthlyBilled = {pa1:'Billed ₹5,988/year',pa2:'Billed ₹15,588/year',pa3:'Billed ₹29,988/year'};
+function toggleBilling(){
+  annual = !annual;
+  const t = document.getElementById('billingToggle');
+  t.classList.toggle('on', annual);
+  ['p1','p2','p3'].forEach(id=>{
+    document.getElementById(id).textContent = annual ? annualP[id] : monthly[id];
+  });
+  ['pa1','pa2','pa3'].forEach(id=>{
+    document.getElementById(id).textContent = annual ? annualBilled[id] : monthlyBilled[id];
+  });
+}
+</script>
+</body>
+</html>

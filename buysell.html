@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy & Sell Group – BizConnect</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f0f0f;--cream:#f5f0e8;--teal:#00897b;--amber:#ffb300;--coral:#ff5722;--coral-dark:#e64a19;--violet:#5c35d4;--sky:#0288d1;--bg:#fafaf7;--border:#e0e0d8;--text-muted:#666660}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink)}
+.banner-zone{background:#1a1a2e;border-bottom:2px solid var(--coral)}
+.ad-slot{display:flex;align-items:center;justify-content:center;min-height:90px;background:linear-gradient(135deg,#1a1a2e,#2d1b0e);position:relative}
+.ad-slot .ad-label{position:absolute;top:6px;right:10px;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:2px}
+.ad-placeholder{font-family:'Syne',sans-serif;font-size:16px;color:rgba(255,255,255,0.2);letter-spacing:3px;text-transform:uppercase;margin-right:20px}
+.ad-cta{background:var(--coral);color:#fff;padding:8px 20px;border-radius:4px;font-size:13px;font-weight:700;text-decoration:none}
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.06)}
+.nav-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--teal);text-decoration:none}.logo span{color:var(--amber)}
+.nav-links{display:flex;gap:6px}
+.nav-links a{text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 16px;border-radius:6px;transition:all .2s}
+.nav-links .btn-home{background:var(--teal);color:#fff}
+.nav-links .btn-listing{background:var(--violet);color:#fff}
+.nav-links .btn-buysell{background:var(--coral);color:#fff}
+.nav-links .btn-advertise{background:var(--amber);color:#000}
+.nav-links .btn-shop{background:var(--sky);color:#fff}
+.nav-links a:hover{opacity:.85;transform:translateY(-1px)}
+.page-header{background:linear-gradient(135deg,#bf360c,#ff5722,#ff7043);color:#fff;padding:64px 24px;text-align:center;position:relative;overflow:hidden}
+.page-header::after{content:'🔄';position:absolute;right:-30px;top:-30px;font-size:200px;opacity:0.05}
+.page-header h1{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,56px);font-weight:800;letter-spacing:-1.5px;margin-bottom:10px}
+.page-header p{color:rgba(255,255,255,0.75);font-size:16px;margin-bottom:28px}
+.header-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-post{background:#fff;color:var(--coral);padding:14px 32px;border-radius:8px;font-weight:800;font-size:15px;text-decoration:none;letter-spacing:.3px}
+.btn-browse{background:rgba(255,255,255,0.15);color:#fff;border:2px solid rgba(255,255,255,0.5);padding:12px 28px;border-radius:8px;font-weight:700;font-size:15px;text-decoration:none}
+.main{max-width:1280px;margin:0 auto;padding:48px 24px}
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:36px;overflow-x:auto}
+.tab{padding:12px 24px;font-weight:600;font-size:14px;cursor:pointer;border:none;background:none;color:var(--text-muted);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s}
+.tab.active{color:var(--coral);border-bottom-color:var(--coral)}
+.tab:hover{color:var(--coral)}
+.grid-controls{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.filter-row{display:flex;gap:10px;flex-wrap:wrap}
+.filter-chip{padding:8px 16px;border:1px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer;background:#fff;transition:all .2s}
+.filter-chip.active,.filter-chip:hover{background:var(--coral);color:#fff;border-color:var(--coral)}
+.post-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.post-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .25s;cursor:pointer}
+.post-card:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(255,87,34,0.12);border-color:var(--coral)}
+.post-img{width:100%;height:180px;object-fit:cover;background:linear-gradient(135deg,#fff3e0,#ffe0b2);display:flex;align-items:center;justify-content:center;font-size:56px;position:relative}
+.post-type{position:absolute;top:12px;left:12px;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.type-sell{background:#ff5722;color:#fff}
+.type-buy{background:#00897b;color:#fff}
+.type-free{background:#8bc34a;color:#fff}
+.post-body{padding:16px}
+.post-price{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--coral);margin-bottom:4px}
+.post-title{font-weight:600;font-size:15px;margin-bottom:6px}
+.post-meta{font-size:12px;color:var(--text-muted);display:flex;gap:12px}
+.post-meta span{display:flex;align-items:center;gap:3px}
+.post-footer{border-top:1px solid var(--border);padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.seller-info{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:6px}
+.seller-avatar{width:24px;height:24px;border-radius:50%;background:var(--coral);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700}
+.btn-contact{background:var(--coral);color:#fff;border:none;padding:6px 16px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer}
+.post-widget{background:linear-gradient(135deg,var(--coral),#ff7043);color:#fff;border-radius:16px;padding:36px;text-align:center;margin:48px 0}
+.post-widget h3{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:10px}
+.post-widget p{color:rgba(255,255,255,0.8);margin-bottom:24px;font-size:15px}
+.post-widget a{background:#fff;color:var(--coral);padding:14px 36px;border-radius:8px;font-weight:800;font-size:15px;text-decoration:none;display:inline-block}
+.ad-strip{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;margin:32px 0}
+.ad-strip p{font-size:9px;color:#bbb;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.ad-strip .ad-space{background:#f5f5f5;height:90px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:13px;letter-spacing:3px}
+footer{background:#0f0f0f;color:#ccc;padding:48px 24px 0;margin-top:60px}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px}
+.footer-brand .logo{font-size:22px;display:block;margin-bottom:12px}
+.footer-brand p{font-size:13px;color:#777;line-height:1.7;max-width:260px}
+.footer-col h4{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:9px}
+.footer-col ul li a{color:#777;text-decoration:none;font-size:13px;transition:color .2s}
+.footer-col ul li a:hover{color:var(--teal)}
+.footer-bottom{border-top:1px solid #222;padding:18px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-bottom p{font-size:12px;color:#555}
+.footer-legal{display:flex;gap:18px}
+.footer-legal a{color:#555;text-decoration:none;font-size:12px}
+.footer-legal a:hover{color:var(--teal)}
+@media(max-width:768px){.nav-links{display:none}.footer-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- BANNER AD -->
+<div class="banner-zone">
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <div class="ad-placeholder">[ Banner Ad – 728×90 ]</div>
+    <a href="advertise.html" class="ad-cta">Advertise Here</a>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Biz<span>Connect</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="btn-home">🏠 Home</a>
+      <a href="listing.html" class="btn-listing">📋 Listings</a>
+      <a href="buysell.html" class="btn-buysell">🔄 Buy & Sell</a>
+      <a href="advertise.html" class="btn-advertise">📣 Advertise</a>
+      <a href="shop.html" class="btn-shop">🛍 Shop</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Buy &amp; Sell Group</h1>
+  <p>Post your items, find great deals, and connect with buyers and sellers in your area</p>
+  <div class="header-actions">
+    <a href="#" class="btn-post">+ Post an Ad</a>
+    <a href="#" class="btn-browse">Browse Deals</a>
+  </div>
+</div>
+
+<div class="main">
+  <div class="tabs">
+    <button class="tab active">🔥 All Listings</button>
+    <button class="tab">🛒 For Sale</button>
+    <button class="tab">🔍 Wanted / Buying</button>
+    <button class="tab">🆓 Free Items</button>
+    <button class="tab">🔄 Swap / Exchange</button>
+    <button class="tab">🏠 Real Estate</button>
+    <button class="tab">🚗 Vehicles</button>
+    <button class="tab">💼 Jobs</button>
+  </div>
+
+  <div class="grid-controls">
+    <div class="filter-row">
+      <span class="filter-chip active">All</span>
+      <span class="filter-chip">Electronics</span>
+      <span class="filter-chip">Furniture</span>
+      <span class="filter-chip">Clothing</span>
+      <span class="filter-chip">Books</span>
+      <span class="filter-chip">Sports</span>
+      <span class="filter-chip">Tools</span>
+    </div>
+    <select style="border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none">
+      <option>Newest First</option>
+      <option>Price: Low to High</option>
+      <option>Price: High to Low</option>
+    </select>
+  </div>
+
+  <div class="post-grid">
+    <div class="post-card">
+      <div class="post-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)">📱<span class="post-type type-sell">For Sale</span></div>
+      <div class="post-body"><div class="post-price">₹18,500</div><div class="post-title">iPhone 13 128GB – Like New</div><div class="post-meta"><span>📍 Pune</span><span>⏰ 2 hrs ago</span></div></div>
+      <div class="post-footer"><div class="seller-info"><div class="seller-avatar">R</div>Rahul M.</div><button class="btn-contact">Contact</button></div>
+    </div>
+    <div class="post-card">
+      <div class="post-img" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)">🛋️<span class="post-type type-sell">For Sale</span></div>
+      <div class="post-body"><div class="post-price">₹6,000</div><div class="post-title">3-Seater Sofa – Good Condition</div><div class="post-meta"><span>📍 Mumbai</span><span>⏰ 5 hrs ago</span></div></div>
+      <div class="post-footer"><div class="seller-info"><div class="seller-avatar" style="background:#9c27b0">P</div>Priya S.</div><button class="btn-contact">Contact</button></div>
+    </div>
+    <div class="post-card">
+      <div class="post-img" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)">🚲<span class="post-type type-sell">For Sale</span></div>
+      <div class="post-body"><div class="post-price">₹4,500</div><div class="post-title">Trek Mountain Bike – 21 Speed</div><div class="post-meta"><span>📍 Bangalore</span><span>⏰ 1 day ago</span></div></div>
+      <div class="post-footer"><div class="seller-info"><div class="seller-avatar" style="background:var(--teal)">A</div>Arjun K.</div><button class="btn-contact">Contact</button></div>
+    </div>
+    <div class="post-card">
+      <div class="post-img" style="background:linear-gradient(135deg,#fff8e1,#ffecb3)">📚<span class="post-type type-free">Free</span></div>
+      <div class="post-body"><div class="post-price">FREE</div><div class="post-title">Engineering Textbooks Bundle (30+)</div><div class="post-meta"><span>📍 Pune</span><span>⏰ 3 hrs ago</span></div></div>
+      <div class="post-footer"><div class="seller-info"><div class="seller-avatar" style="background:#8bc34a">S</div>Sneha P.</div><button class="btn-contact" style="background:#8bc34a">Contact</button></div>
+    </div>
+    <div class="post-card">
+      <div class="post-img" style="background:linear-gradient(135deg,#fce4ec,#f48fb1)">💻<span class="post-type type-buy">Wanted</span></div>
+      <div class="post-body"><div class="post-price">Budget: ₹30K</div><div class="post-title">Looking for: MacBook Air M1 or M2</div><div class="post-meta"><span>📍 Delhi</span><span>⏰ 6 hrs ago</span></div></div>
+      <div class="post-footer"><div class="seller-info"><div class="seller-avatar" style="background:#e91e63">V</div>Vikram N.</div><button class="btn-contact" style="background:#e91e63">Contact</button></div>
+    </div>
+    <div class="post-card">
+      <div class="post-img" style="background:linear-gradient(135deg,#e0f7fa,#b2ebf2)">🎸<span class="post-type type-sell">For Sale</span></div>
+      <div class="post-body"><div class="post-price">₹8,000</div><div class="post-title">Yamaha F310 Acoustic Guitar + Bag</div><div class="post-meta"><span>📍 Pune</span><span>⏰ 12 hrs ago</span></div></div>
+      <div class="post-footer"><div class="seller-info"><div class="seller-avatar" style="background:#00acc1">M</div>Meera D.</div><button class="btn-contact">Contact</button></div>
+    </div>
+  </div>
+
+  <!-- POST AD WIDGET -->
+  <div class="post-widget">
+    <h3>Have something to sell?</h3>
+    <p>Post your ad for free and reach thousands of buyers in your city today.</p>
+    <a href="advertise.html">Post a Free Ad →</a>
+  </div>
+
+  <!-- MID AD STRIP -->
+  <div class="ad-strip">
+    <p>Advertisement</p>
+    <div class="ad-space">[ Leaderboard Ad – 970×90 ]</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="logo">Biz<span>Connect</span></a><p>India's trusted local business directory. Connecting buyers and sellers since 2020.</p></div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="listing.html">Business Listings</a></li><li><a href="buysell.html">Buy & Sell</a></li><li><a href="shop.html">Shop</a></li></ul></div>
+      <div class="footer-col"><h4>Business</h4><ul><li><a href="advertise.html">Advertise</a></li><li><a href="advertise.html">Subscription Plans</a></li><li><a href="#">Add Listing</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms & Conditions</a></li><li><a href="#">Cookie Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 BizConnect. All rights reserved.</p>
+      <div class="footer-legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="#">Cookie Policy</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
